@@ -54,11 +54,19 @@ ERD :
     }
     ?>
    ```
+- Propeties Kelas : <br>
+private $host: Menyimpan nama host database (dalam hal ini localhost). <br>
+private $username: Menyimpan username untuk mengakses database (root). <br>
+private $pass: Menyimpan password untuk akses (kosong karena default MySQL tidak memiliki password). <br>
+private $db: Menyimpan nama database yang akan digunakan (persuratan). <br>
+protected $koneksi: Menyimpan objek koneksi ke database yang dapat diakses oleh subclass (karena protected).
 - Script ini membuat sebuah **kelas `Database`** yang berfungsi untuk mengelola koneksi ke database MySQL menggunakan ekstensi **MySQLi**. Di dalam kelas ini terdapat beberapa atribut yang digunakan untuk menyimpan informasi koneksi, seperti **host**, **username**, **password**, dan **nama database**. 
 
 - Fungsi **constructor** otomatis dijalankan ketika kelas diinisialisasi, yang bertugas membuat koneksi ke database. Jika koneksi berhasil, objek MySQLi disimpan di atribut **$koneksi**. Jika gagal, program akan berhenti dan menampilkan pesan error.
 
 - Script ini juga menyediakan sebuah **method `getConnection()`** yang mengembalikan koneksi ke database, sehingga bisa digunakan untuk menjalankan query. Selain itu, ada method kosong **`tampilkanData()`** yang bisa di-override oleh kelas turunan untuk menampilkan data dari database. <br>
+
+
 
 <b> 2. Gunakan _construct sebagai link ke database </b>
 ```
@@ -438,8 +446,8 @@ Script PHP ini mengatur tampilan data laporan lembur dan data pengganti pengawas
 ![image](https://github.com/user-attachments/assets/3c357251-864d-4fd9-8a20-b45c2f15d3ec)
 
 <b>7. User Role Dosen </b> <br>
-Tujuan Pembutan ini adalah untuk memberikan akses yang terbatas kepada pengguna, yaitu Dosen. Apabila meng-klik 'user' pada navbar dan memilih dosen, maka tampilan hanya menunujkan tabel Laporan Kerja Lembur dan tampilan tabel yang lebih khusus pada kolom 'kategori'. Akses dosen hanya dibatasi pada bagian yang berhubungan dengan laporan lembur, sehingga tidak dapat mengelola atau melihat data terkait pengawasan ujian.
-a) Membuat filter pada tabel Laporan Kerja lembur, dengan mengambil kolom keterangan yang bernilia "Selesai"
+Tujuan Pembutan ini adalah untuk memberikan akses yang terbatas kepada pengguna, yaitu Dosen. Apabila meng-klik 'user' pada navbar dan memilih dosen, maka tampilan hanya menunujkan tabel Laporan Kerja Lembur dan tampilan tabel yang lebih khusus pada kolom 'kategori'. Akses dosen hanya dibatasi pada bagian yang berhubungan dengan laporan lembur, sehingga tidak dapat mengelola atau melihat data terkait pengawasan ujian. <br>
+a) Membuat filter pada tabel Laporan Kerja lembur, dengan mengambil kolom "Keterangan" yang bernilia "Selesai"
 ```
 function tampilkanData() {
         $query = "SELECT * FROM laporan_kerja_lembur WHERE keterangan = 'Selesai'"; // Query yang difilter
@@ -459,7 +467,7 @@ $selesai    = new Selesai();
 $selesai_lembur = $selesai->tampilkanData(); 
 ```
 Ketika metode tampilkanData() dipanggil pada objek Selesai. Metode ini berisi query yang difilter, yang hanya mengambil data dari tabel laporan_kerja_lembur dengan keterangan 'Selesai'. Proses pengambilan data hanya akan menghasilkan laporan yang sesuai dengan kriteria yang ditetapkan. <br><br>
-b) Membuat filter pada tabel Laporan Kerja lembur, dengan mengambil kolom keterangan yang bernilia "Selesai"
+b) Membuat filter pada tabel Laporan Kerja lembur, dengan mengambil kolom "Keterangan" yang bernilia "Selesai"
 ```
 // Membuat kelas Belum_Selesai yang mewarisi Selesai
 class Belum_Selesai extends Selesai {
@@ -494,6 +502,11 @@ Tujuan Pembutan ini adalah untuk memberikan akses kepada pengguna, yaitu Admin. 
 **Output :**
 ![image](https://github.com/user-attachments/assets/1595b274-8537-4c59-9f16-7e6afdf21efc)
 
+---
+**Script Navigasi :**
+```
+
+```
 
 
 
