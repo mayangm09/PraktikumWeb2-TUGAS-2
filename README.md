@@ -1,8 +1,8 @@
 # PraktikumWeb2-TUGAS 2
 
-Implementasi CRUD dengan menggunakan PPHP OOP <br>
-Implementasi CRUD menggunakan PHP OOP melibatkan pemanfaatan konsep Object-Oriented Programming (OOP) dalam mengelola operasi Create, Read, Update, dan Delete pada database. Dalam pendekatan ini, kita memisahkan logika menjadi kelas-kelas dan metode-metode, sehingga lebih terstruktur dan mudah dikelola. <br>
-<br>
+<b>Implementasi CRUD dengan menggunakan PHP OOP </b>  
+Implementasi CRUD menggunakan PHP OOP melibatkan pemanfaatan konsep Object-Oriented Programming (OOP) dalam mengelola operasi Create, Read, Update, dan Delete pada database. Dalam pendekatan ini, kita memisahkan logika menjadi kelas-kelas dan metode-metode, sehingga lebih terstruktur dan mudah dikelola.
+
 ---
 **Contoh Study Kasus :** <br>
 ERD :
@@ -282,6 +282,7 @@ $belum_lembur = $belum_selesai->tampilkanData(); // Menyimpan hasil dalam variab
 Polimorfisme dalam kode ini terlihat melalui metode tampilkanData() yang ada pada kelas LaporanKerjaLembur, Selesai, dan Belum_Selesai. Kelas Selesai mewarisi dari kelas LaporanKerjaLembur, sehingga ia memiliki akses ke semua metode dari kelas induk. Namun, kelas Selesai mengoverride metode tampilkanData() untuk menampilkan data yang spesifik, yaitu hanya data dengan keterangan 'Selesai'.Begitu pula, kelas Belum_Selesai, yang mewarisi dari kelas Selesai, juga mengoverride metode tampilkanData() untuk mengambil data dengan keterangan 'Belum Selesai'.Dengan cara ini, meskipun ketiga kelas memiliki metode dengan nama yang sama, implementasinya berbeda. Ketika metode tampilkanData() dipanggil dari objek kelas Selesai, hasil yang didapat adalah data yang telah difilter untuk keterangan 'Selesai', sementara panggilan dari objek kelas Belum_Selesai akan mengembalikan data dengan keterangan 'Belum Selesai'. <br><br>
 
 <b>6. Dashboard Laporan Kerja Lembur dan Pengawasan </b> <br>
+Pada halaman ini menampilkan seluruh data yang ada didalam tabel kedua nya, yaitu tabel Laporan kerja Lembur dan Data Pengganti Pengawas Ujian.
 ```
 <?php 
 require_once 'class_lembur.php'; // Memasukkan file yang berisi class LaporanKerjaLembur
@@ -437,6 +438,7 @@ Script PHP ini mengatur tampilan data laporan lembur dan data pengganti pengawas
 ![image](https://github.com/user-attachments/assets/3c357251-864d-4fd9-8a20-b45c2f15d3ec)
 
 <b>7. User Role Dosen </b> <br>
+Tujuan Pembutan ini adalah untuk memberikan akses yang terbatas kepada pengguna, yaitu Dosen. Apabila meng-klik 'user' pada navbar dan memilih dosen, maka tampilan hanya menunujkan tabel Laporan Kerja Lembur dan tampilan tabel yang lebih khusus pada kolom 'kategori'
 a) Membuat filter pada tabel Laporan Kerja lembur, dengan mengambil kolom keterangan yang bernilia "Selesai"
 ```
 function tampilkanData() {
