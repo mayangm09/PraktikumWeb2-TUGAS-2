@@ -221,4 +221,75 @@ Class Belum_Selesai adalah contoh penerapan konsep pewarisan yang lebih lanjut, 
 Konsep pewarisan memungkinkan class Belum_Selesai untuk menggunakan dan mengubah fungsi yang sudah ada tanpa perlu mendefinisikannya kembali. Dalam hal ini, Belum_Selesai mengoverride metode tampilkanData() dari class Selesai untuk menyesuaikan query yang diinginkan. Class ini mengambil data dengan kondisi spesifik, yaitu hanya data dengan keterangan 'Belum Selesai', sehingga fungsionalitas di dalam class turunan lebih spesifik dan sesuai dengan kebutuhan. <br>
 
 <b>5. Terapkan polimorfisme untuk minimal 2 peran sesuai studi kasus </b>
+a) Pada tabel/ kelas Laporan Kerja Lembur
+```
+<?php
+require_once('database.php'); // Mengimpor file 'database.php' yang berisi koneksi ke database
 
+// Membuat kelas LaporanKerjaLembur yang merupakan turunan dari kelas Database
+class LaporanKerjaLembur extends Database {
+    // Method untuk menampilkan semua data dari tabel 'laporan_kerja_lembur'
+    function tampilkanData() {
+        $query = "SELECT * FROM laporan_kerja_lembur"; // Query untuk mengambil semua data
+        $data  = $this->koneksi->query($query); // Menggunakan koneksi dari superclass Database
+
+        $hasil = []; // Inisialisasi array untuk menampung hasil
+        if ($data && $data->num_rows > 0) { // Cek apakah ada data
+            while ($row = $data->fetch_assoc()) { // Mengambil data sebagai array asosiatif
+                $hasil[] = $row; // Menambahkan setiap row ke array hasil
+            }
+        }
+        return $hasil; // Mengembalikan array hasil
+    }
+}
+
+// Membuat objek dari kelas LaporanKerjaLembur dan memanggil method tampilkanData
+$laporan       = new LaporanKerjaLembur(); 
+$LaporanLembur = $laporan->tampilkanData(); // Menyimpan hasil dalam variabel $LaporanLembur
+
+// Membuat kelas Materi yang mewarisi LaporanKerjaLembur
+class Selesai extends LaporanKerjaLembur {
+    // Method untuk menampilkan data spesifik di mana 'uraian_pekerjaan' adalah 'Menyiapkan materi kuliah'
+    function tampilkanData() {
+        $query = "SELECT * FROM laporan_kerja_lembur WHERE keterangan = 'Selesai'"; // Query yang difilter
+        $data  = $this->koneksi->query($query); // Menggunakan koneksi dari superclass
+
+        $hasil = []; // Inisialisasi array hasil
+        if ($data && $data->num_rows > 0) { // Cek apakah ada data
+            while ($row = $data->fetch_assoc()) { // Mengambil data sebagai array asosiatif
+                $hasil[] = $row; // Menambahkan setiap row ke array hasil
+            }
+        }
+        return $hasil; // Mengembalikan hasil
+    }
+}
+
+// Membuat objek dari kelas Materi dan memanggil method tampilkanData
+$selesai    = new Selesai(); 
+$selesai_lembur = $selesai->tampilkanData(); // Menyimpan hasil dalam variabel $materi_kuliah
+
+// Membuat kelas riset yang mewarisi Materi
+class Belum_Selesai extends Selesai {
+    // Method untuk menampilkan data spesifik di mana 'uraian_pekerjaan' adalah 'Menyusun Laporan Riset'
+    function tampilkanData() {
+        $query = "SELECT * FROM laporan_kerja_lembur WHERE keterangan = 'Belum Selesai'"; // Query yang difilter
+        $data  = $this->koneksi->query($query); // Menggunakan koneksi dari superclass
+
+        $hasil = []; // Inisialisasi array hasil
+        if ($data && $data->num_rows > 0) { // Cek apakah ada data
+            while ($row = $data->fetch_assoc()) { // Mengambil data sebagai array asosiatif
+                $hasil[] = $row; // Menambahkan setiap row ke array hasil
+            }
+        }
+        return $hasil; // Mengembalikan hasil
+    }
+}
+
+// Membuat objek dari kelas riset dan memanggil method tampilkanData
+$belum_selesai    = new Belum_Selesai(); 
+$belum_lembur = $belum_selesai->tampilkanData(); // Menyimpan hasil dalam variabel $laporan_riset
+?>
+
+```
+Polimorfisme dalam kode ini terlihat melalui metode tampilkanData() yang ada pada kelas LaporanKerjaLembur, Selesai, dan Belum_Selesai. Kelas Selesai mewarisi dari kelas LaporanKerjaLembur, sehingga ia memiliki akses ke semua metode dari kelas induk. Namun, kelas Selesai mengoverride metode tampilkanData() untuk menampilkan data yang spesifik, yaitu hanya data dengan keterangan 'Selesai'.Begitu pula, kelas Belum_Selesai, yang mewarisi dari kelas Selesai, juga mengoverride metode tampilkanData() untuk mengambil data dengan keterangan 'Belum Selesai'.Dengan cara ini, meskipun ketiga kelas memiliki metode dengan nama yang sama, implementasinya berbeda. Ketika metode tampilkanData() dipanggil dari objek kelas Selesai, hasil yang didapat adalah data yang telah difilter untuk keterangan 'Selesai', sementara panggilan dari objek kelas Belum_Selesai akan mengembalikan data dengan keterangan 'Belum Selesai'. <br><br>
+6. Menampilkan
