@@ -438,7 +438,7 @@ Script PHP ini mengatur tampilan data laporan lembur dan data pengganti pengawas
 ![image](https://github.com/user-attachments/assets/3c357251-864d-4fd9-8a20-b45c2f15d3ec)
 
 <b>7. User Role Dosen </b> <br>
-Tujuan Pembutan ini adalah untuk memberikan akses yang terbatas kepada pengguna, yaitu Dosen. Apabila meng-klik 'user' pada navbar dan memilih dosen, maka tampilan hanya menunujkan tabel Laporan Kerja Lembur dan tampilan tabel yang lebih khusus pada kolom 'kategori'
+Tujuan Pembutan ini adalah untuk memberikan akses yang terbatas kepada pengguna, yaitu Dosen. Apabila meng-klik 'user' pada navbar dan memilih dosen, maka tampilan hanya menunujkan tabel Laporan Kerja Lembur dan tampilan tabel yang lebih khusus pada kolom 'kategori'. Akses dosen hanya dibatasi pada bagian yang berhubungan dengan laporan lembur, sehingga tidak dapat mengelola atau melihat data terkait pengawasan ujian.
 a) Membuat filter pada tabel Laporan Kerja lembur, dengan mengambil kolom keterangan yang bernilia "Selesai"
 ```
 function tampilkanData() {
@@ -458,7 +458,7 @@ function tampilkanData() {
 $selesai    = new Selesai(); 
 $selesai_lembur = $selesai->tampilkanData(); 
 ```
-ketika metode tampilkanData() dipanggil pada objek Selesai. Metode ini berisi query yang difilter, yang hanya mengambil data dari tabel laporan_kerja_lembur dengan keterangan 'Selesai'. Proses pengambilan data hanya akan menghasilkan laporan yang sesuai dengan kriteria yang ditetapkan. <br><br>
+Ketika metode tampilkanData() dipanggil pada objek Selesai. Metode ini berisi query yang difilter, yang hanya mengambil data dari tabel laporan_kerja_lembur dengan keterangan 'Selesai'. Proses pengambilan data hanya akan menghasilkan laporan yang sesuai dengan kriteria yang ditetapkan. <br><br>
 b) Membuat filter pada tabel Laporan Kerja lembur, dengan mengambil kolom keterangan yang bernilia "Selesai"
 ```
 // Membuat kelas Belum_Selesai yang mewarisi Selesai
@@ -490,7 +490,10 @@ Proses polimorfisme terjadi ketika metode dengan nama yang sama, yaitu tampilkan
 ![image](https://github.com/user-attachments/assets/cd7a3133-74cb-451f-967f-cc410f9d519a)
 
 <b>8. User Role Admin </b> <br>
-```
-```
+Tujuan Pembutan ini adalah untuk memberikan akses kepada pengguna, yaitu Admin. Admin memiliki akses penuh ke seluruh sistem. Admin dapat melihat dan mengelola semua data, termasuk data penggantian pengawas ujian dan laporan kerja lembur. Dengan hak akses tanpa batas ini, admin dapat melakukan berbagai tindakan yang dibutuhkan untuk mengelola sistem secara menyeluruh. <br> <br>
+**Output :**
+![image](https://github.com/user-attachments/assets/1595b274-8537-4c59-9f16-7e6afdf21efc)
+
+
 
 
