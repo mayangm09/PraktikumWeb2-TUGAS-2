@@ -505,8 +505,168 @@ Tujuan Pembutan ini adalah untuk memberikan akses kepada pengguna, yaitu Admin. 
 ---
 **Script Navigasi :**
 ```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Semua Data</title> <!-- Judul halaman -->
+    <link rel="stylesheet" href="css/bootstrap.min.css"> <!-- Memuat file CSS Bootstrap -->
+</head>
+<body>
+    <!-- Bagian navbar menggunakan komponen Bootstrap -->
+    <nav class="navbar navbar-expand-lg bg-info">
+        <div class="container-fluid">
+            <!-- Teks navbar dengan link ke halaman 'datalaporan.php' -->
+            <a class="navbar-brand" href="datalaporan.php">Data Laporan</a>
+            <!-- Tombol toggle untuk tampilan responsif -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Menu navbar yang bisa collapse (menyembunyikan) di layar kecil -->
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                 <ul class="navbar-nav">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            User
+                        </a>
+                        <!-- Isi dropdown dengan link ke halaman lain -->
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="beranda.php">Admin</a></li>
+                            <li><a class="dropdown-item" href="beranda2.php">Dosen</a></li>
+                        </ul>
+                <ul class="navbar-nav">
+                    <!-- Link untuk halaman 'Semua Data dan Pengawas Ujian' -->
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="beranda.php">Semua Data</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="pengawas.php">Penggantian Pengawas Ujian</a>
+                    </li>
+                    <!-- Dropdown menu untuk 'Laporan Kerja Lembur' -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Laporan Kerja Lembur
+                        </a>
+                        <!-- Isi dropdown dengan link ke halaman lain -->
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="selesai.php">Selesai</a></li>
+                            <li><a class="dropdown-item" href="belum_selesai.php">Belum Selesai</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Script untuk memuat JavaScript Bootstrap -->
+    <script src="../../boostrap/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js.map"></script>
+</body>
+</html>
 
 ```
+**Output :** <br>
+![image](https://github.com/user-attachments/assets/c478099b-39ea-46b6-92fb-783b8a0e6520)
+
+**index coding :**
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semua Data</title> <!-- Judul halaman -->
+    <link rel="stylesheet" href="css/bootstrap.min.css"> <!-- Memuat file CSS Bootstrap -->
+    <style>
+        /* Menambahkan styling agar konten terpusat secara vertikal dan horizontal */
+        .centered-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 90vh; /* Konten vertikal di tengah penuh */
+            text-align: center;
+        }
+        h2 {
+            font-size: 2.2rem; /* Ukuran font judul sedikit diperbesar */
+            margin-bottom: 15px; /* Mengurangi jarak bawah judul untuk keseimbangan */
+            font-weight: bold; /* Menambah ketebalan huruf agar terlihat lebih tegas */
+        }
+        p {
+            max-width: 700px; /* Membatasi lebar paragraf agar tidak terlalu panjang */
+            margin: 0 auto; /* Membuat paragraf terpusat */
+            line-height: 1.8; /* Spasi antar baris untuk kenyamanan baca */
+            font-size: 1.1rem; /* Ukuran font paragraf sedikit diperbesar */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Bagian navbar menggunakan komponen Bootstrap -->
+    <nav class="navbar navbar-expand-lg bg-info">
+        <div class="container-fluid">
+            <!-- Teks navbar dengan link ke halaman 'datalaporan.php' -->
+            <a class="navbar-brand" href="datalaporan.php">Data Laporan</a>
+            <!-- Tombol toggle untuk tampilan responsif -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Menu navbar yang bisa collapse (menyembunyikan) di layar kecil -->
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <!-- Dropdown menu untuk 'User' -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">User</a>
+                        <!-- Isi dropdown dengan link ke halaman lain -->
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="beranda.php">Admin</a></li>
+                            <li><a class="dropdown-item" href="beranda2.php">Dosen</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Konten utama dengan teks di tengah -->
+    <div class="container centered-content">
+        <h2>Selamat Datang di Sistem Pengelolaan Pengawas Ujian dan Laporan Kerja Lembur</h2> <!-- Judul halaman -->
+        <p>Website ini menyediakan layanan untuk memudahkan pengelolaan data terkait penggantian pengawas ujian serta laporan kerja lembur. Dengan sistem terintegrasi ini, Anda dapat mengakses informasi terkini mengenai perubahan jadwal pengawas ujian dan merekap laporan lembur karyawan secara efektif dan efisien.</p>
+    </div>
+
+    <!-- Script untuk memuat JavaScript Bootstrap -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+```
+**Output :**
+![image](https://github.com/user-attachments/assets/ddcfb918-c8c9-4b1c-aea6-b477f875922a)
+
+---
+**Tampil Seluruh Halaman :**
+1. index
+![image](https://github.com/user-attachments/assets/4998532b-135a-4680-9198-39ee9033a92f) <br>
+2. User Admin
+![image](https://github.com/user-attachments/assets/0491e4c6-2d62-4714-bdf4-deaa266f0695) <br>
+3. User Dosen
+![image](https://github.com/user-attachments/assets/84be7ba4-ceff-4c05-990e-7f4e8dd5e436) <br>
+4. Polimorfisme kelas 'Selesai'
+![image](https://github.com/user-attachments/assets/fbe71c42-25b4-4f5c-bef1-adb86648909f) <br>
+5. Polimorfisme kelas 'Belum Selesai'
+![image](https://github.com/user-attachments/assets/dfdc048a-83fe-49ce-80a6-760e9b999572)
+
+
+
+
+
+
+
 
 
 
