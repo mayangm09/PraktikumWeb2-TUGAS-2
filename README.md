@@ -130,19 +130,7 @@ $pengawas_ujian = $pengawas->tampilkanData(); // Mengambil data laporan
 // echo "</pre>";
 ?>
 ```
-- require_once('database.php'): <br>
-Script ini mengimpor file database.php yang berisi pengaturan koneksi ke database. Ini memungkinkan kelas Penggantian_Pengawas untuk menggunakan koneksi tersebut tanpa harus mendeklarasikan ulang. <br>
-- Deklarasi Kelas Penggantian_Pengawas: <br>
-Kelas ini merupakan turunan dari kelas Database, yang berarti kelas ini mewarisi fungsi dan atribut yang sudah ada di kelas Database, terutama terkait koneksi database.
-Kelas ini difokuskan untuk mengambil dan menampilkan data terkait penggantian pengawas ujian dari tabel database yang sesuai. <br>
-- Method tampilkanData(): <br>
-Method ini bertugas untuk menjalankan query SQL yang mengambil semua data dari tabel penggantian_pengawasan_ujian.
-Query SQL yang digunakan adalah: SELECT * FROM penggantian_pengawasan_ujian, yang berarti mengambil seluruh data dari tabel tersebut.
-Menggunakan objek $koneksi yang berasal dari kelas induk untuk menjalankan query di database.
-Jika ada hasil yang didapatkan (melalui pengecekan $data->num_rows > 0), maka data diubah menjadi array asosiatif menggunakan fetch_assoc(), lalu disimpan dalam array $hasil. Pada akhirnya, method ini mengembalikan data dalam bentuk array hasil yang bisa diproses lebih lanjut. <br>
-- Pengujian Kode: <br>
-$pengawas = new Penggantian_Pengawas();: Membuat objek dari kelas Penggantian_Pengawas. Objek ini digunakan untuk mengakses method di dalam kelas tersebut.
-$pengawas_ujian = $pengawas->tampilkanData();: Memanggil method tampilkanData() untuk mengambil data dari database dan menyimpannya di variabel $pengawas_ujian. <br>
+Kelas Penggantian_Pengawas merupakan turunan dari kelas Database, yang berarti bahwa ia mewarisi semua atribut dan metode yang ada di kelas Database. Dengan pewarisan ini, kelas Penggantian_Pengawas dapat menggunakan koneksi database yang telah didefinisikan di kelas Database tanpa harus mendefinisikannya ulang. Pewarisan ini memungkinkan pengorganisasian kode yang lebih baik, karena kode yang umum dapat ditempatkan di kelas induk, sedangkan kode yang spesifik dapat didefinisikan di kelas turunan
 
 b) Mendeklarasikan Kelas Laporan Kerja Lembur
 ```
@@ -220,7 +208,7 @@ Class Belum_Selesai adalah contoh penerapan konsep pewarisan yang lebih lanjut, 
 
 Konsep pewarisan memungkinkan class Belum_Selesai untuk menggunakan dan mengubah fungsi yang sudah ada tanpa perlu mendefinisikannya kembali. Dalam hal ini, Belum_Selesai mengoverride metode tampilkanData() dari class Selesai untuk menyesuaikan query yang diinginkan. Class ini mengambil data dengan kondisi spesifik, yaitu hanya data dengan keterangan 'Belum Selesai', sehingga fungsionalitas di dalam class turunan lebih spesifik dan sesuai dengan kebutuhan. <br>
 
-<b>5. Terapkan polimorfisme untuk minimal 2 peran sesuai studi kasus </b>
+<b>5. Terapkan polimorfisme untuk minimal 2 peran sesuai studi kasus </b> <br>
 a) Pada tabel/ kelas Laporan Kerja Lembur
 ```
 <?php
@@ -292,4 +280,163 @@ $belum_lembur = $belum_selesai->tampilkanData(); // Menyimpan hasil dalam variab
 
 ```
 Polimorfisme dalam kode ini terlihat melalui metode tampilkanData() yang ada pada kelas LaporanKerjaLembur, Selesai, dan Belum_Selesai. Kelas Selesai mewarisi dari kelas LaporanKerjaLembur, sehingga ia memiliki akses ke semua metode dari kelas induk. Namun, kelas Selesai mengoverride metode tampilkanData() untuk menampilkan data yang spesifik, yaitu hanya data dengan keterangan 'Selesai'.Begitu pula, kelas Belum_Selesai, yang mewarisi dari kelas Selesai, juga mengoverride metode tampilkanData() untuk mengambil data dengan keterangan 'Belum Selesai'.Dengan cara ini, meskipun ketiga kelas memiliki metode dengan nama yang sama, implementasinya berbeda. Ketika metode tampilkanData() dipanggil dari objek kelas Selesai, hasil yang didapat adalah data yang telah difilter untuk keterangan 'Selesai', sementara panggilan dari objek kelas Belum_Selesai akan mengembalikan data dengan keterangan 'Belum Selesai'. <br><br>
-6. Menampilkan nnm
+
+<b>6. Dashboard Laporan Kerja Lembur dan Pengawasan </b> <br>
+```
+<?php 
+require_once 'class_lembur.php'; // Memasukkan file yang berisi class LaporanKerjaLembur
+
+// Membuat objek dari class LaporanKerjaLembur dan mengambil data lembur
+$laporan       = new LaporanKerjaLembur(); 
+$LaporanLembur = $laporan->tampilkanData(); // Memanggil method tampilkanData untuk menampilkan data lembur
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Laporan</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css"> <!-- Menggunakan Bootstrap untuk styling -->
+    <style>
+        /* Styling tambahan untuk margin, padding, dan tampilan tabel */
+        .container {
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+        .card-header h2 {
+            margin-bottom: 0;
+            padding: 10px 0;
+            font-size: 1.5rem;
+        }
+        .text-laporan {
+            text-align: center;
+            font-size: 2rem; 
+            font-weight: bold; 
+            margin-bottom: 20px;
+        }
+        table thead th {
+            text-align: center; 
+        }
+    </style>
+</head>
+
+<body>
+    <?php include 'beranda.html'; ?> <!-- Menyisipkan file index.html -->
+    <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="text-laporan">DATA LAPORAN</div> <!-- Bagian judul Data Laporan -->
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="text-center">LAPORAN KERJA LEMBUR</h2>
+                </div>
+                <div class="card-body">
+                    <!-- Tabel untuk menampilkan laporan kerja lembur -->
+                    <table class="table table-bordered table-hover">
+                        <thead class="table-info">
+                            <tr>
+                                <th scope="col">NO.</th>
+                                <th scope="col">ID Lembur</th>
+                                <th scope="col">Hari Tanggal</th>
+                                <th scope="col">Waktu</th>
+                                <th scope="col">Uraian Pekerjaan</th>
+                                <th scope="col">Keterangan</th>
+                                <th scope="col">Nama Dosen</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            // Menampilkan data lembur dalam bentuk tabel
+                            $no = 1; // Nomor urut
+                            foreach ($LaporanLembur as $x) {
+                            ?>
+                                <tr>
+                                    <td><?php echo $no++; ?></td>
+                                    <td><?php echo $x['id_lembur']; ?></td>
+                                    <td><?php echo $x['hari_tgl_laporan']; ?></td>
+                                    <td><?php echo $x['waktu']; ?></td>
+                                    <td><?php echo $x['uraian_pekerjaan']; ?></td>
+                                    <td><?php echo $x['keterangan']; ?></td>
+                                    <td><?php echo $x['dosen']; ?></td>
+                                </tr>
+                            <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php 
+require_once 'class_pengawas.php'; // Memasukkan file yang berisi class Penggantian_Pengawas
+// Membuat objek dari class Penggantian_Pengawas dan mengambil data pengawas ujian
+$pengawas       = new Penggantian_Pengawas();
+$pengawas_ujian = $pengawas->tampilkanData(); // Memanggil method tampilkanData untuk menampilkan data pengawas ujian
+?>
+<div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="text-center">DATA PENGGANTI PENGAWASAN UJIAN</h2>
+                    </div>
+                    <div class="card-body">
+                        <!-- Tabel untuk menampilkan data penggantian pengawas ujian -->
+                        <table class="table table-bordered table-hover">
+                            <thead class="table-info">
+                                <tr>
+                                    <th scope="col">NO.</th>
+                                    <th scope="col">ID Pengganti</th>
+                                    <th scope="col">Nama Pengawas Diganti</th>
+                                    <th scope="col">Unit Kerja</th>
+                                    <th scope="col">Hari Tanggal Penggantian</th>
+                                    <th scope="col">Jam</th>
+                                    <th scope="col">Ruang</th>
+                                    <th scope="col">Nama Pengawas Pengganti</th>
+                                    <th scope="col">Nama Dosen</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                // Menampilkan data pengawas ujian dalam bentuk tabel
+                                $no = 1; // Nomor urut
+                                foreach ($pengawas_ujian as $x) {
+                                ?>
+                                    <tr>
+                                        <td><?php echo $no++; ?></td>
+                                        <td><?php echo $x['id_pengganti']; ?></td>
+                                        <td><?php echo $x['nama_pengawas_diganti']; ?></td>
+                                        <td><?php echo $x['unit_kerja']; ?></td>
+                                        <td><?php echo $x['hari_tgl_penggantian']; ?></td>
+                                        <td><?php echo $x['jam']; ?></td>
+                                        <td><?php echo $x['ruang']; ?></td>
+                                        <td><?php echo $x['nama_pengawas_pengganti']; ?></td>
+                                        <td><?php echo $x['dosen']; ?></td>
+                                    </tr>
+                                <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="js/bootstrap.bundle.min.js"></script> <!-- Memasukkan Bootstrap JavaScript -->
+</body>
+
+</html>
+```
+Script PHP ini mengatur tampilan data laporan lembur dan data pengganti pengawasan ujian dengan memanfaatkan dua kelas yang terpisah untuk masing-masing jenis laporan. Pertama, file yang berisi kelas LaporanKerjaLembur diimpor, memungkinkan pembuatan objek untuk mengakses dan menampilkan data lembur. Setelah itu, metode tampilkanData() dipanggil untuk mengambil data lembur yang diperlukan, yang kemudian disimpan dalam variabel $LaporanLembur.Setelah tabel laporan lembur, script memuat kelas Penggantian_Pengawas, membuat objek dari kelas ini, dan memanggil metode tampilkanData() untuk mengambil data pengawas ujian. Data tersebut kemudian disajikan dalam tabel kedua dengan format yang sama. Struktur tabel ini mencakup informasi seperti ID pengganti, nama pengawas yang diganti, unit kerja, tanggal penggantian, jam, ruang, nama pengawas pengganti, dan nama dosen. <br><br>
+**Output :** <br>
+![image](https://github.com/user-attachments/assets/3c357251-864d-4fd9-8a20-b45c2f15d3ec)
+
+
+
+<b>7. 
+
