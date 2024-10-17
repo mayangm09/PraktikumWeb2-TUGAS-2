@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Semua Data</title> <!-- Judul halaman -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> <!-- Menggunakan Bootstrap dari CDN -->
+</head>
+<body>
+    <!-- Bagian navbar menggunakan komponen Bootstrap -->
+    <nav class="navbar navbar-expand-lg bg-info">
+        <div class="container-fluid">
+            <!-- Teks navbar dengan link ke halaman 'datalaporan.php' -->
+            <a class="navbar-brand" href="datalaporan.php">Data Laporan</a>
+            <!-- Tombol toggle untuk tampilan responsif -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Menu navbar yang bisa collapse (menyembunyikan) di layar kecil -->
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <!-- Dropdown menu untuk 'User' -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            User
+                        </a>
+                        <!-- Isi dropdown dengan link ke halaman lain -->
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="beranda.php">Admin</a></li>
+                            <li><a class="dropdown-item" href="beranda2.php">Dosen</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Script untuk memuat JavaScript Bootstrap dari CDN -->
+    <script src="../Tugas2/js/bootstrap.bundle.min.js.map"></script>
+</body>
+</html>
