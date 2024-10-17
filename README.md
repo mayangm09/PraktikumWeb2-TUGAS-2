@@ -436,7 +436,59 @@ Script PHP ini mengatur tampilan data laporan lembur dan data pengganti pengawas
 **Output :** <br>
 ![image](https://github.com/user-attachments/assets/3c357251-864d-4fd9-8a20-b45c2f15d3ec)
 
+<b>7. User Role Dosen </b> <br>
+a) Membuat filter pada tabel Laporan Kerja lembur, dengan mengambil kolom keterangan yang bernilia "Selesai"
+```
+function tampilkanData() {
+        $query = "SELECT * FROM laporan_kerja_lembur WHERE keterangan = 'Selesai'"; // Query yang difilter
+        $data  = $this->koneksi->query($query); // Menggunakan koneksi dari superclass
 
+        $hasil = []; // Inisialisasi array hasil
+        if ($data && $data->num_rows > 0) { // Cek apakah ada data
+            while ($row = $data->fetch_assoc()) { // Mengambil data sebagai array asosiatif
+                $hasil[] = $row; // Menambahkan setiap row ke array hasil
+            }
+        }
+        return $hasil; // Mengembalikan hasil
+    }
+}
 
-<b>7. 
+$selesai    = new Selesai(); 
+$selesai_lembur = $selesai->tampilkanData(); 
+```
+ketika metode tampilkanData() dipanggil pada objek Selesai. Metode ini berisi query yang difilter, yang hanya mengambil data dari tabel laporan_kerja_lembur dengan keterangan 'Selesai'. Proses pengambilan data hanya akan menghasilkan laporan yang sesuai dengan kriteria yang ditetapkan. <br><br>
+b) Membuat filter pada tabel Laporan Kerja lembur, dengan mengambil kolom keterangan yang bernilia "Selesai"
+```
+// Membuat kelas Belum_Selesai yang mewarisi Selesai
+class Belum_Selesai extends Selesai {
+    // Method untuk menampilkan data spesifik di mana 'uraian_pekerjaan' adalah 'Menyusun Laporan Riset'
+    function tampilkanData() {
+        $query = "SELECT * FROM laporan_kerja_lembur WHERE keterangan = 'Belum Selesai'"; // Query yang difilter
+        $data  = $this->koneksi->query($query); // Menggunakan koneksi dari superclass
+
+        $hasil = []; // Inisialisasi array hasil
+        if ($data && $data->num_rows > 0) { // Cek apakah ada data
+            while ($row = $data->fetch_assoc()) { // Mengambil data sebagai array asosiatif
+                $hasil[] = $row; // Menambahkan setiap row ke array hasil
+            }
+        }
+        return $hasil; // Mengembalikan hasil
+    }
+}
+
+// Membuat objek dari kelas riset dan memanggil method tampilkanData
+$belum_selesai    = new Belum_Selesai(); 
+$belum_lembur = $belum_selesai->tampilkanData(); // Menyimpan hasil dalam variabel $laporan_riset
+?>
+```
+Proses polimorfisme terjadi ketika metode dengan nama yang sama, yaitu tampilkanData(), menghasilkan perilaku yang berbeda sesuai dengan kelas yang memanggilnya. Meskipun kelas Belum_Selesai mewarisi seluruh struktur dari kelas Selesai, termasuk koneksi ke database, query yang dijalankan berbeda karena implementasi yang telah diubah dalam metode tersebut. Hasilnya, metode ini bisa digunakan untuk mengambil data yang lebih spesifik berdasarkan kondisi yang ditetapkan di masing-masing kelas <br><br>
+**Output :** <br>
+![image](https://github.com/user-attachments/assets/f24f9c51-dddb-4ebd-9ba4-ae88732fbd4d)
+![image](https://github.com/user-attachments/assets/822f57f7-10fe-4ce1-b3d1-7bebf73e6657)
+![image](https://github.com/user-attachments/assets/cd7a3133-74cb-451f-967f-cc410f9d519a)
+
+<b>8. User Role Admin </b> <br>
+```
+```
+
 
