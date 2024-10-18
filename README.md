@@ -16,8 +16,11 @@ ERD :
 
 **Penyelesaian :** <br>
 
-<b>1. Membuat file Database </b>
-![image](https://github.com/user-attachments/assets/77970cc4-0d58-40fd-b342-0fbc292921cb)
+<b>1. Membuat file Database </b> <br>
+![image](https://github.com/user-attachments/assets/acde0eed-040f-4145-88dc-7efc597171e3)
+![image](https://github.com/user-attachments/assets/b721cdc4-fea6-4e75-a391-a5c5a20d30e1)
+
+
 
    ```
    <?php
